@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ryu.drawesome",
+  "version": "0.1.0",
+  "description": "A lightweight sketching studio for Ryu with seven natural-feeling pens, area erasing, SVG or PNG export, plus chat dialogs for sketching or annotating visual references.",
+  "author": {
+    "name": "Ryu",
+    "url": "https://ryuhq.com"
+  },
+  "homepage": "https://github.com/amajorai/ryu-drawesome",
+  "repository": "https://github.com/amajorai/ryu-drawesome",
+  "keywords": [
+    "drawing",
+    "sketching",
+    "annotation",
+    "canvas",
+    "markup",
+    "whiteboard"
+  ],
+  "extensions": {
+    "com.ryuhq.ryu": {
+      "id": "@ryu/drawesome",
+      "displayName": "Drawesome"
+    }
+  }
+}
