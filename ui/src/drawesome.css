@@ -1,0 +1,449 @@
+@import "tailwindcss";
+@import "@ryu/ui/app-ui.css";
+
+:root {
+	--drawesome-surface: #202020;
+	--drawesome-control: rgba(37, 37, 37, 0.82);
+	--drawesome-control-border: rgba(255, 255, 255, 0.13);
+	--drawesome-text: #f2f2f3;
+	--drawesome-muted: #acacb1;
+	color-scheme: dark;
+}
+
+html,
+body,
+#ryu-plugin-root {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	font-family: var(--font-sans);
+	color: var(--drawesome-text);
+	background: var(--drawesome-surface);
+}
+
+.drawesome-app,
+.drawesome-dialog-app {
+	position: relative;
+	width: 100%;
+	min-width: 0;
+	height: 100%;
+	min-height: 0;
+	overflow: hidden;
+	color: var(--drawesome-text);
+	background: var(--drawesome-surface);
+	isolation: isolate;
+}
+
+.drawesome-workspace,
+.drawesome-dialog-workspace {
+	position: absolute;
+	inset: 0;
+	min-width: 0;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.drawesome-paper {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--drawesome-surface);
+}
+
+.drawesome-drawing-surface {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.drawesome-dialog-reference {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	object-fit: contain;
+}
+
+.drawesome-topbar {
+	position: absolute;
+	inset: 16px 16px auto;
+	z-index: 3;
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	justify-content: space-between;
+	pointer-events: none;
+}
+
+.drawesome-title-wrap,
+.drawesome-actions {
+	display: flex;
+	align-items: center;
+	background: var(--drawesome-control);
+	border: 1px solid var(--drawesome-control-border);
+	border-radius: 999px;
+	backdrop-filter: blur(16px);
+}
+
+.drawesome-title-wrap {
+	gap: 8px;
+	min-width: 0;
+	height: 38px;
+	padding: 0 11px;
+	pointer-events: auto;
+}
+
+.drawesome-title {
+	width: min(220px, 26vw);
+	min-width: 120px;
+	height: 32px;
+	padding: 0;
+	font-size: 12px;
+	color: var(--drawesome-text);
+	outline: none;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.drawesome-title:hover,
+.drawesome-title:focus {
+	border: 0;
+	box-shadow: none;
+}
+
+.drawesome-title:focus-visible {
+	outline: 1px solid rgba(255, 255, 255, 0.65);
+	outline-offset: 3px;
+}
+
+.drawesome-title::placeholder {
+	color: var(--drawesome-muted);
+}
+
+.drawesome-save {
+	display: grid;
+	flex: 0 0 auto;
+	place-items: center;
+	width: 16px;
+	height: 16px;
+}
+
+.drawesome-save-dot {
+	width: 7px;
+	height: 7px;
+	background: #70c48d;
+	border-radius: 50%;
+}
+
+.drawesome-save-saving .drawesome-save-dot {
+	background: #efb45d;
+	animation: drawesome-pulse 1s ease-in-out infinite;
+}
+
+.drawesome-save-error .drawesome-save-dot {
+	background: #ed7777;
+}
+
+.drawesome-actions {
+	gap: 2px;
+	padding: 2px;
+	pointer-events: auto;
+}
+.drawesome-custom-color:focus-within {
+	outline: 2px solid rgba(255, 255, 255, 0.86);
+	outline-offset: 3px;
+}
+
+.drawesome-tool-dock {
+	position: absolute;
+	top: 4px;
+	left: 50%;
+	z-index: 4;
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	padding: 3px 5px;
+	background: var(--drawesome-control);
+	border: 1px solid var(--drawesome-control-border);
+	border-radius: 999px;
+	backdrop-filter: blur(16px);
+	transform: translateX(-50%);
+}
+
+.drawesome-tool-group,
+.drawesome-history-group {
+	display: flex;
+	gap: 2px;
+	align-items: center;
+}
+
+.drawesome-history-floating {
+	position: absolute;
+	top: 8px;
+	right: 12px;
+	z-index: 4;
+}
+
+.drawesome-tool-divider {
+	width: 1px;
+	height: 19px;
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.drawesome-size-control {
+	position: absolute;
+	top: 50%;
+	left: 7px;
+	z-index: 3;
+	display: grid;
+	place-items: center;
+	width: 28px;
+	height: 186px;
+	transform: translateY(-50%);
+}
+
+.drawesome-size-control input {
+	width: 4px;
+	height: 176px;
+	margin: 0;
+	appearance: none;
+	accent-color: rgba(255, 255, 255, 0.38);
+	cursor: ns-resize;
+	background: transparent;
+	border: 0;
+	border-radius: 999px;
+	direction: rtl;
+	writing-mode: vertical-lr;
+}
+
+.drawesome-size-control input::-webkit-slider-runnable-track {
+	width: 4px;
+	background: rgba(255, 255, 255, 0.38);
+	border-radius: 999px;
+}
+
+.drawesome-size-control input::-webkit-slider-thumb {
+	width: 16px;
+	height: 16px;
+	margin-left: -6px;
+	appearance: none;
+	background: #f4f4f5;
+	border: 1px solid #bcbcc1;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.drawesome-size-control input::-moz-range-track {
+	width: 4px;
+	background: rgba(255, 255, 255, 0.38);
+	border-radius: 999px;
+}
+
+.drawesome-size-control input::-moz-range-thumb {
+	width: 14px;
+	height: 14px;
+	background: #f4f4f5;
+	border: 1px solid #bcbcc1;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.drawesome-size-control input:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.86);
+	outline-offset: 4px;
+}
+
+.drawesome-palette {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	z-index: 4;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	max-width: calc(100vw - 72px);
+	padding: 5px 3px;
+	transform: translateX(-50%);
+}
+.drawesome-custom-color {
+	position: relative;
+	display: grid;
+	flex: 0 0 auto;
+	place-items: center;
+	width: 20px;
+	min-width: 20px;
+	height: 20px;
+	padding: 0;
+	border: 1px solid rgba(255, 255, 255, 0.36);
+	border-radius: 50%;
+	transition:
+		transform 120ms ease,
+		box-shadow 120ms ease;
+}
+
+.drawesome-custom-color {
+	overflow: hidden;
+	border-color: rgba(255, 255, 255, 0.7);
+}
+
+.drawesome-custom-color-mark {
+	position: absolute;
+	inset: 0;
+	background: conic-gradient(
+		#f04b45,
+		#f5bd31,
+		#57bb69,
+		#47b4cf,
+		#526ce0,
+		#b44cd2,
+		#f04b45
+	);
+	border-radius: inherit;
+}
+
+.drawesome-custom-color-input {
+	position: absolute;
+	inset: -8px;
+	width: calc(100% + 16px);
+	height: calc(100% + 16px);
+	padding: 0;
+	cursor: pointer;
+	border: 0;
+	opacity: 0;
+}
+
+.drawesome-dialog-window {
+	background: var(--drawesome-surface);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 22px;
+	box-shadow: 0 28px 90px rgba(0, 0, 0, 0.56);
+}
+
+.drawesome-dialog-app {
+	border-radius: inherit;
+}
+
+.drawesome-loading {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	font-size: 12px;
+	color: var(--drawesome-muted);
+}
+
+.drawesome-loading-mark {
+	width: 16px;
+	height: 16px;
+	border: 2px solid rgba(255, 255, 255, 0.18);
+	border-right-color: rgba(255, 255, 255, 0.82);
+	border-radius: 50%;
+	animation: drawesome-spin 0.8s linear infinite;
+}
+
+@keyframes drawesome-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes drawesome-pulse {
+	50% {
+		opacity: 0.45;
+	}
+}
+
+@media (max-width: 600px) {
+	.drawesome-topbar {
+		inset: 12px 12px auto;
+		gap: 8px;
+	}
+
+	.drawesome-title-wrap {
+		gap: 6px;
+		height: 36px;
+		padding: 0 9px;
+	}
+
+	.drawesome-title {
+		width: min(150px, 36vw);
+		min-width: 82px;
+	}
+
+	.drawesome-actions {
+		gap: 0;
+	}
+
+	.drawesome-tool-dock {
+		top: 8px;
+		gap: 3px;
+		padding: 3px 5px;
+	}
+
+	.drawesome-size-control {
+		left: 6px;
+		height: 132px;
+	}
+
+	.drawesome-size-control input {
+		height: 124px;
+	}
+
+	.drawesome-palette {
+		bottom: 10px;
+		gap: 6px;
+		max-width: calc(100vw - 48px);
+	}
+	.drawesome-custom-color {
+		width: 18px;
+		min-width: 18px;
+		height: 18px;
+	}
+}
+
+@media (max-height: 500px) {
+	.drawesome-size-control,
+	.drawesome-size-control input {
+		height: 110px;
+	}
+	.drawesome-palette {
+		bottom: 8px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.drawesome-loading-mark,
+	.drawesome-save-saving .drawesome-save-dot,
+	.drawesome-custom-color {
+		transition: none;
+		animation: none;
+	}
+}
+
+/* Keep the drawing surface filling the paper after the tool-dock migration. */
+.drawesome-paper .drawesome__root,
+.drawesome-paper > div {
+	width: 100%;
+	height: 100%;
+}
+
+.drawesome-ink-sample {
+	width: 16px;
+	height: 16px;
+	background-color: var(--ink);
+	border-radius: 50%;
+}
