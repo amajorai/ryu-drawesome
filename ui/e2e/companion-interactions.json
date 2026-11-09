@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "package": "drawesome",
+  "scope": "partial",
+  "expectedRows": 3,
+  "selector": {
+    "spec": "e2e/drawesome-sketch-workflow.spec.ts",
+    "config": "playwright.config.ts"
+  },
+  "evidenceBoundary": "The Drawesome UI runs in Playwright Chromium against the package Vite server. The main sketch path uses browser localStorage and validates persisted strokes plus real SVG/PNG download bytes; sketch-dialog tests render the app in a same-origin iframe with deterministic local storage/toast fixtures and inspect the tokenized parent postMessage payload, PNG signature, size, and dimensions. This verifies rendered app behavior and the message contract, not the native host modal, Ryu Core storage service, or OS-level download UI. Source row relocation only; no new current-source execution or behavioral closure is claimed by this map update. The departed Draw/onChange row is retired, not closed: drawing now uses the production DrawSurface drawing instance. Its actual pointer gestures remain asserted inside the attachment and persisted-export cases; DrawSurface itself is not a current handler-bearing central census candidate. Fresh validation remains pending.",
+  "assertions": [
+    {
+      "row": {
+        "package": "drawesome",
+        "source_file": "apps-store/drawesome/ui/src/App.tsx",
+        "line": "367",
+        "component": "App",
+        "tag": "Button",
+        "events": "onClick",
+        "label_or_destination": "Close sketch"
+      },
+      "testTitle": "sketch dialog Close sketch sends a close action without creating an attachment",
+      "assertionName": "Close sketch sends a tokenized close message and does not attach a file.",
+      "assertionMarker": "Close sketch closes the host dialog with its capability token and no image payload."
+    },
+    {
+      "row": {
+        "package": "drawesome",
+        "source_file": "apps-store/drawesome/ui/src/App.tsx",
+        "line": "377",
+        "component": "App",
+        "tag": "Button",
+        "events": "onClick",
+        "label_or_destination": "Attach sketch"
+      },
+      "testTitle": "sketch dialog drawing attaches the rendered PNG through the tokenized host message",
+      "assertionName": "Attach sends the rendered PNG bytes and exact size through the host message.",
+      "assertionMarker": "Attach posts the rendered PNG bytes to the tokenized host bridge."
+    },
+    {
+      "row": {
+        "package": "drawesome",
+        "source_file": "apps-store/drawesome/ui/src/App.tsx",
+        "line": "453",
+        "component": "App",
+        "tag": "Button",
+        "events": "onClick",
+        "label_or_destination": "Export sketch as PNG"
+      },
+      "testTitle": "Drawesome draws, saves locally, and exports the exact SVG file",
+      "assertionName": "PNG export writes a valid non-empty PNG with dimensions and visible success feedback.",
+      "assertionMarker": "Export PNG downloads a valid local PNG with actual dimensions and rendered-export status."
+    }
+  ]
+}
